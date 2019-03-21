@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallLogAnalyzer", "CallLogA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarBinding", "JarBinding\JarBinding.csproj", "{C427E32E-8395-4C96-8A6F-9F39953F993C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiLevelView", "C:\Users\Mohammed\source\repos\MultilevelRecycleViewTest\MultilevelView\MultiLevelView.csproj", "{0FFE1CCA-8A39-48FC-A4A2-164997470A30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiLevelView", "MultilevelView\MultiLevelView.csproj", "{0FFE1CCA-8A39-48FC-A4A2-164997470A30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -122,7 +122,7 @@
       <Project>{c427e32e-8395-4c96-8a6f-9f39953f993c}</Project>
       <Name>JarBinding</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\Mohammed\source\repos\MultilevelRecycleViewTest\MultilevelView\MultiLevelView.csproj">
+    <ProjectReference Include="..\MultilevelView\MultiLevelView.csproj">
       <Project>{0ffe1cca-8a39-48fc-a4a2-164997470a30}</Project>
       <Name>MultiLevelView</Name>
     </ProjectReference>
