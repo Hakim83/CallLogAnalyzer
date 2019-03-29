@@ -1,7 +1,28 @@
 <resources>
-  <string name="app_name">CallLog Analyzer</string>
+  <string name="app_name">Calls Analyzer</string>
+  <string name="analysis_result">Analysis Result</string>
   <string name="action_settings">Settings</string>
   <string name="h">h</string>
   <string name="m">m</string>
   <string name="s">s</string>
+  <string name="from_date">from date..</string>
+  <string name="to_date">to date..</string>
+  <string name="select_your_method">Select your method</string>
+  <string name="all_calls">All calls</string>
+  <string name="carrier_area">Carrier / Area</string>
+  <string name="gather_calls">Gather calls with same contact name</string>
+  <string name="sort_calls_by">Sort calls by</string>
+  <string name="date_time">Date / Time</string>
+  <string name="call_duration">Call"'"s duration</string>
+  <string name="number_of_calls">Number of calls</string>
+  <string name="sum_of_calls_duration">Sum of calls"'" duration</string>
+  <string name="default_country">Default country</string>
+  <string name="analyze_calls">Analyze calls</string>
+  <string name="calls">calls</string>
+  <string name="all_calls">All calls</string>
+  <string name="mobile_calls">Mobile calls</string>
+  <string name="fixed_line_calls">Fixed line calls</string>
+  <string name="other_calls">Other calls</string>
+  <string name="by_contacts">By Contacts</string>
+  <string name="by_carrier_area">By Carrier / Area</string>
 </resources>

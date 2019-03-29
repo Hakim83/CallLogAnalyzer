@@ -37,9 +37,14 @@ namespace CallLogAnalyzer
         private void setExpandButton(ImageView expandButton, bool isExpanded)
         {
             // set the icon based on the current state
-            expandButton.SetImageResource(isExpanded
-                ? Resource.Drawable.ic_keyboard_arrow_down_black_24dp
-                : Resource.Drawable.ic_keyboard_arrow_up_black_24dp);
+            //expandButton.SetImageResource(isExpanded
+            //    ? Resource.Drawable.ic_keyboard_arrow_up_black_24dp
+            //    : Resource.Drawable.ic_keyboard_arrow_down_black_24dp);
+            //expandButton.SetImageResource(Resource.Drawable.ic_keyboard_arrow_down_black_24dp);
+            if (isExpanded)
+            {
+                expandButton.Rotation = 180f;
+            }
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -123,6 +128,8 @@ namespace CallLogAnalyzer
                 {
                     // set click event on expand button here
                     mParent.MultiLevelRecyclerView.ToggleItemsGroup(AdapterPosition);
+
+
                     // rotate the icon based on the current state
                     // but only here because otherwise we'd see the animation on expanded items too while scrolling
                     mExpandIcon.Animate().Rotation(mParent.ListItems[AdapterPosition].Expanded ? -180 : 0).Start();

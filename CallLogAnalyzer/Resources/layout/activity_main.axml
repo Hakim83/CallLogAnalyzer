@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
+    android:layout_margin="10dp"	
     android:orientation="vertical">
 
     <LinearLayout
@@ -18,30 +18,50 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+			android:layout_marginEnd="10dp"
             android:clickable="true"
             android:editable="false"
             android:focusable="false"
-            android:hint="from date.." />
+            android:hint="@string/from_date" />
 
         <EditText
             android:id="@+id/ToEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+			android:layout_marginStart="10dp"
             android:clickable="true"
             android:editable="false"
             android:focusable="false"
-            android:hint="to date.." />
+            android:hint="@string/to_date" />
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select your method"/>
+        android:text="@string/select_your_method"/>
+	<RadioGroup
+		android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_marginBottom="10dp"
+		android:orientation="horizontal">
+		<RadioButton
+            android:id="@+id/allCallsRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/all_calls" />
+
+         <RadioButton
+            android:id="@+id/carrierRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/carrier_area" />            
+	</RadioGroup>
+	<!--
     <Spinner
         android:id="@+id/methodSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
+	-->
     <LinearLayout
         android:id="@+id/contactsCallsLayout"
         android:layout_width="match_parent"
@@ -55,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Gather calls with same contact name" />
+            android:text="@string/gather_calls" />
 
         <LinearLayout
             android:id="@+id/callsLayout"
@@ -66,7 +86,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sort calls by" />
+                android:text="@string/sort_calls_by" />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -78,13 +98,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="Date / Time" />
+                    android:text="@string/date_time" />
 
                 <RadioButton
                     android:id="@+id/callDurationRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Call's Duration" />
+                    android:text="@string/call_duration" />
             </RadioGroup>
         </LinearLayout>
         <LinearLayout
@@ -96,7 +116,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sort calls by" />
+                android:text="@string/sort_calls_by" />
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -106,17 +126,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="Date / Time" />
+                    android:text="@string/date_time" />
                 <RadioButton
                     android:id="@+id/contactCountRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Number of calls" />
+                    android:text="@string/number_of_calls" />
                 <RadioButton
                     android:id="@+id/contactDurationRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sum of calls' Duration" />
+                    android:text="@string/sum_of_calls_duration" />
             </RadioGroup>
         </LinearLayout>
 
@@ -132,7 +152,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Default Country" />
+            android:text="@string/default_country" />
         <Spinner
             android:id="@+id/countrySpinner"
             android:layout_width="wrap_content"
@@ -165,7 +185,7 @@
             android:layout_marginBottom="20dp"
             android:background="@android:color/holo_blue_dark"
             android:textColor="@android:color/white"
-            android:text="Analyze calls" />
+            android:text="@string/analyze_calls" />
     </LinearLayout>
 
 

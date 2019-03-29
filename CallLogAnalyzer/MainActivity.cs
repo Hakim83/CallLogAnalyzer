@@ -27,7 +27,9 @@ namespace CallLogAnalyzer
         private Button SubmitButton;
         private EditText FromEditText;
         private EditText ToEditText;
-        private Spinner methodSpinner;
+        //private Spinner methodSpinner;
+        RadioButton allCallsRadioButton;
+        RadioButton carrierRadioButton;
         private LinearLayout contactCallLayout;
         private CheckBox contactCheckBox;
         private LinearLayout contactLayout;
@@ -42,7 +44,7 @@ namespace CallLogAnalyzer
         //private TextView codeTextView;
 
         private const int CallLogRequest = 66;
-        private List<CountryInfos> countriesInfo = CountryInfos.GetAllCountries();
+        private List<CountryInfos> countriesInfo = CountryInfos.GetAllCountries(Locale.Default.Country);
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -51,7 +53,9 @@ namespace CallLogAnalyzer
             SubmitButton = FindViewById<Button>(Resource.Id.submitButton);
             FromEditText = FindViewById<EditText>(Resource.Id.FromEditText);
             ToEditText = FindViewById<EditText>(Resource.Id.ToEditText);
-            methodSpinner = FindViewById<Spinner>(Resource.Id.methodSpinner);
+            //methodSpinner = FindViewById<Spinner>(Resource.Id.methodSpinner);
+            allCallsRadioButton = FindViewById<RadioButton>(Resource.Id.allCallsRadioButton);
+            carrierRadioButton = FindViewById<RadioButton>(Resource.Id.carrierRadioButton);
             contactCallLayout = FindViewById<LinearLayout>(Resource.Id.contactsCallsLayout);
             contactCheckBox = FindViewById<CheckBox>(Resource.Id.contactsCheckBox);
 
@@ -72,14 +76,18 @@ namespace CallLogAnalyzer
             ToEditText.Click += ToEditText_Click;
             SubmitButton.Click += SubmitButton_Click;
 
-            var methodAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleSpinnerDropDownItem,
-                new string[]
-                {
-                    "All Calls",
-                    "Carrier / Area"
-                });
-            methodSpinner.Adapter = methodAdapter;
-            methodSpinner.ItemSelected += MethodSpinner_ItemSelected;
+            //var methodAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleSpinnerDropDownItem,
+            //    new string[]
+            //    {
+            //        "All Calls",
+            //        "Carrier / Area"
+            //    });
+            //methodSpinner.Adapter = methodAdapter;
+            //methodSpinner.ItemSelected += MethodSpinner_ItemSelected;
+
+            allCallsRadioButton.CheckedChange += AllCallsRadioButton_CheckedChange;
+            carrierRadioButton.CheckedChange += CarrierRadioButton_CheckedChange;
+            carrierRadioButton.Checked = true;
 
             contactCheckBox.CheckedChange += ContactCheckBox_CheckedChange;
 
@@ -98,7 +106,7 @@ namespace CallLogAnalyzer
             //runTest();
             //testImojis();
         }
-
+        
         private void ContactCheckBox_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
             if (contactCheckBox.Checked)
@@ -148,12 +156,12 @@ namespace CallLogAnalyzer
                 return;
             }
 
-            Intent intent = new Intent(this, typeof(DateAnalysisActivity));
+            Intent intent = new Intent(this, typeof(AnalysisActivity));
 
             intent.PutExtra("FromDate", FromEditText.Text);
             intent.PutExtra("ToDate", ToEditText.Text);
 
-            if (methodSpinner.SelectedItemPosition == 0)  // all
+            if (allCallsRadioButton.Checked)  // all
             {
                 var method = contactCheckBox.Checked ? "Contacts" : "All";
                 intent.PutExtra("Method", method);
@@ -210,6 +218,24 @@ namespace CallLogAnalyzer
             {
                 contactCallLayout.Visibility = ViewStates.Gone;
                 carrierAreaLayout.Visibility = ViewStates.Visible;
+            }
+        }
+
+        private void CarrierRadioButton_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            if (e.IsChecked)
+            {
+                contactCallLayout.Visibility = ViewStates.Gone;
+                carrierAreaLayout.Visibility = ViewStates.Visible; 
+            }
+        }
+
+        private void AllCallsRadioButton_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            if (e.IsChecked)
+            {
+                contactCallLayout.Visibility = ViewStates.Visible;
+                carrierAreaLayout.Visibility = ViewStates.Gone; 
             }
         }
 

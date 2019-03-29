@@ -71,7 +71,7 @@ namespace CallLogAnalyzer.ViewModel
             public int CallsDuration => MobileType.CallsDuration + FixedLineType.CallsDuration + OtherType.CallsDuration;
             public class MobileTypeViewModel
             {
-                public int CallsCount => Carriers.Sum(c => c.CallsDuration);
+                public int CallsCount => Carriers.Sum(c => c.CallsCount);
                 public int CallsDuration => Carriers.Count() >= 0 ? Carriers.Sum(c => (int)c.CallsDuration) : 0;
                 public IEnumerable<CarrierViewModel> Carriers { get; set; }
                 public class CarrierViewModel

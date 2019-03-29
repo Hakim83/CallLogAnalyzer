@@ -1,0 +1,28 @@
+<resources>
+  <string name="app_name">محلل المكالمات</string>
+  <string name="analysis_result">نتيجة التحليل</string>
+  <string name="action_settings">Settings</string>
+  <string name="h">س</string>
+  <string name="m">د</string>
+  <string name="s">ث</string>
+  <string name="from_date">من تاريخ..</string>
+  <string name="to_date">إلى تاريخ..</string>
+  <string name="select_your_method">إختر الطريقة</string>
+  <string name="all_calls">جميع المكالمات</string>
+  <string name="carrier_area">مقدم الخدمة / المنطقة</string>
+  <string name="gather_calls">تجميع المكالمات لنفس الإسم</string>
+  <string name="sort_calls_by">ترتيب المكالمات بإستخدام</string>
+  <string name="date_time">الزمن / التاريخ</string>
+  <string name="call_duration">زمن المكالمة</string>
+  <string name="number_of_calls">عدد المكالمات</string>
+  <string name="sum_of_calls_duration">مجموع زمن المكالمات</string>
+  <string name="default_country">البلد الإفتراضي</string>
+  <string name="analyze_calls">تحليل المكالمات</string>
+  <string name="calls">مكالمة</string>
+  <string name="all_calls">جميع المكالمات</string>
+  <string name="mobile_calls">مكالمات المحمول</string>
+  <string name="fixed_line_calls">مكالمات الخطوط الثابتة</string>
+  <string name="other_calls">مكالمات أخرى</string>
+  <string name="by_contacts">بالأسماء</string>
+  <string name="by_carrier_area">بمقدم الخدمة / المنطقة</string>
+</resources>
