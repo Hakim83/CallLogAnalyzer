@@ -41,7 +41,8 @@ namespace CallLogAnalyzer
             _fragments = new Fragment[]
             {
                 new RawFragment(),
-                new ContactsFragment()
+                new ContactsFragment(),
+                new CarrierAreaFragment()
             };
 
 
@@ -50,6 +51,7 @@ namespace CallLogAnalyzer
 
             AddTabToActionBar(Resource.String.all_calls, Resource.Drawable.ic_list);
             AddTabToActionBar(Resource.String.by_contacts, Resource.Drawable.ic_contacts);
+            AddTabToActionBar(Resource.String.by_carrier_area, Resource.Drawable.ic_language);
             //IList<RecyclerViewItem> itemList;
 
             //string method = Intent.GetStringExtra("Method");
@@ -186,9 +188,17 @@ namespace CallLogAnalyzer
 
         void AddTabToActionBar(int labelResourceId, int iconResourceId)
         {
-            tabLayout.AddTab(tabLayout.NewTab()
-                .SetText(labelResourceId)
-                .SetIcon(iconResourceId));
+            try
+            {
+                tabLayout.AddTab(tabLayout.NewTab()
+                        .SetText(labelResourceId)
+                        .SetIcon(iconResourceId));
+            }
+            catch (Exception ex)
+            {
+                Log.Error("CallLog", ex.Message);
+                throw;
+            }
         }
         
         Fragment[] _fragments;

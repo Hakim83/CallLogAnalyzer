@@ -1,0 +1,11 @@
+﻿<resources>
+  <string-array name="raw_sort_options">
+    <item>Date / Time</item>
+    <item>Call"'"s duration</item>
+  </string-array>
+  <string-array name="contacts_sort_options">
+    <item>Date / Time</item>
+    <item>Number of calls</item>
+    <item>Sum of calls"'" duration</item>
+  </string-array>
+</resources>

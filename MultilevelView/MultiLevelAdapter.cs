@@ -8,10 +8,10 @@ namespace MultilevelView
     {
         public IList<RecyclerViewItem> RecyclerViewItemList { get; set; }
 
-        protected MultiLevelAdapter(IList<RecyclerViewItem> recyclerViewItemList)
-        {
-            RecyclerViewItemList = recyclerViewItemList;
-        }
+        //protected MultiLevelAdapter(IList<RecyclerViewItem> recyclerViewItemList)
+        //{
+        //    RecyclerViewItemList = recyclerViewItemList;
+        //}
 
         public override int ItemCount => RecyclerViewItemList.Count;
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Android;
 using Android.Content;
 using Android.Graphics;
@@ -17,17 +18,27 @@ namespace CallLogAnalyzer
     {
         private Holder mViewHolder;
         public Context Context;
-        public IList<RecyclerViewItem> ListItems;
+
+        public IList<RecyclerViewItem> ListItems
+        {
+            get => _listItems;
+            set
+            {
+                _listItems = value;
+                base.RecyclerViewItemList = value;
+            }
+        }
+
         public Item CurrentItem;
         public MultiLevelRecyclerView MultiLevelRecyclerView;
+        private IList<RecyclerViewItem> _listItems;
 
         //public MyAdapter(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         //{
 
         //}
 
-        public MyAdapter(Context mContext, IList<RecyclerViewItem> mListItems, MultiLevelRecyclerView mMultiLevelRecyclerView) :
-            base(mListItems)
+        public MyAdapter(Context mContext, IList<RecyclerViewItem> mListItems, MultiLevelRecyclerView mMultiLevelRecyclerView) 
         {
             this.ListItems = mListItems;
             this.Context = mContext;
@@ -49,8 +60,9 @@ namespace CallLogAnalyzer
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            return new Holder(this,
-                LayoutInflater.From(parent.Context).Inflate(Resource.Layout.item_layout, parent, false));
+            var holder = new Holder(this,
+                    LayoutInflater.From(parent.Context).Inflate(Resource.Layout.item_layout, parent, false));
+            return holder;
 
         }
 
@@ -59,20 +71,19 @@ namespace CallLogAnalyzer
             mViewHolder = (Holder)holder;
             try
             {
-            CurrentItem = (Item)ListItems[position];
-
+                CurrentItem = (Item)ListItems[position];
             }
             catch (Exception)
             {
 
-                Log.Error("Position Error","Pos:" + position.ToString());
+                Log.Error("Position Error", "Pos:" + position.ToString());
                 return;
             }
 
             var level = GetItemViewType(position);
             var grayValue = 255 - 16 * level;
-            holder.ItemView.SetBackgroundColor(new Color(grayValue,grayValue,grayValue));
-           
+            holder.ItemView.SetBackgroundColor(new Color(grayValue, grayValue, grayValue));
+
 
             mViewHolder.mTitle.Text = CurrentItem.Text;
             mViewHolder.mSubtitle.Text = CurrentItem.SecondText;

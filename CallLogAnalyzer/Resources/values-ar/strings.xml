@@ -25,4 +25,14 @@
   <string name="other_calls">مكالمات أخرى</string>
   <string name="by_contacts">بالأسماء</string>
   <string name="by_carrier_area">بمقدم الخدمة / المنطقة</string>
+  <string name="ok">حسناً</string>
+  <string name="cancel">إلغاء</string>
+  <string name="select_period">إختر الفترة</string>
+  <string name="Incoming">واردة</string>
+  <string name="Outgoing">صادرة</string>
+  <string name="Missed">فائتة</string>
+  <string name="VoiceMail">بريد صوتي</string>
+  <string name="Rejected">مرفوضة</string>
+  <string name="Blocked">محظورة</string>
+  <string name="we_need_permission">"نحتاج السماح بالدخول للمكالمات لتحليلها!"</string>
 </resources>

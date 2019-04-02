@@ -9,12 +9,13 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using CallLogAnalyzer.Dialogs;
+using CallLogAnalyzer.Model;
 using CallLogAnalyzer.ViewModel;
 using MultilevelView;
 
 namespace CallLogAnalyzer
 {
-    public class RawFragment : Fragment
+    public class CarrierAreaFragment : Fragment
     {
         private IList<RecyclerViewItem> itemList;
         private MultiLevelRecyclerView multiLevelRecyclerView;
@@ -25,9 +26,9 @@ namespace CallLogAnalyzer
             // Use this to return your custom view for this Fragment
             View view = inflater.Inflate(Resource.Layout.fragment_layout, null);
 
-            var callsViewModel = new CallsViewModel(AnalysisActivity.AllCalls, "DateTime");
-            itemList = new ListViewItemsBuilder().GetItems(callsViewModel);
-
+            var detailedCallsViewModel = new DetailedCallsViewModel(AnalysisActivity.AllCalls);
+            itemList = new ListViewItemsBuilder().GetItems(detailedCallsViewModel);
+            
             //listview and updates
             multiLevelRecyclerView = (MultiLevelRecyclerView)view.FindViewById(Resource.Id.MultiLevelView);
             multiLevelRecyclerView.SetLayoutManager(new LinearLayoutManager(Activity));
@@ -42,21 +43,22 @@ namespace CallLogAnalyzer
             multiLevelRecyclerView.OpenTill(0);
 
             FloatingActionButton fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab);
+            fab.SetImageResource(Resource.Drawable.ic_flag);
             fab.Click += (se, ev) =>
             {
                 //Toast.MakeText(Activity,"clicked!",ToastLength.Long).Show();
-                RawSortDialog dialog = new RawSortDialog();
-                dialog.SortMethodSelected += UpdateItems;
-                dialog.Show(Activity.SupportFragmentManager, "SortBy dialog");
+                var dialog = new CountryPicker();
+                dialog.RegionCodeSelected += UpdateItems;
+                dialog.Show(Activity.SupportFragmentManager, "Countries dialog");
             };
             return view;
         }
-
-        private void UpdateItems(string sortBy)
+        private void UpdateItems(string regionCode)
         {
-            var callsViewModel = new CallsViewModel(AnalysisActivity.AllCalls, sortBy);
+            PhoneNumberInfo.DefaultRegionCode = regionCode;
+            var detailedCallsViewModel = new DetailedCallsViewModel(AnalysisActivity.AllCalls);
 
-            myAdapter.ListItems = new ListViewItemsBuilder().GetItems(callsViewModel);
+            myAdapter.ListItems = new ListViewItemsBuilder().GetItems(detailedCallsViewModel);
             myAdapter.NotifyDataSetChanged();
             multiLevelRecyclerView.OpenTill(0);
         }

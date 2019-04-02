@@ -1,6 +1,7 @@
 ﻿
 using Android.Content;
 using Android.Telephony;
+using CallLogAnalyzer.Helpers;
 using Com.Google.I18n.Phonenumbers;
 using Com.Google.I18n.Phonenumbers.Geocoding;
 using Java.Util;
@@ -18,7 +19,8 @@ namespace CallLogAnalyzer.Model
         public string CarrierName { get; set; }
         public PhoneNumberUtil.PhoneNumberType PhoneNumberType { get; set; }
 
-        public static string DefaultRegionCode { get; set; } = Locale.Default.Country;
+        public static string DefaultRegionCode { get; set; } = 
+            GetDefaultRegionCodeFromDevice(ContextHolder.Context);
 
         public PhoneNumberInfo(string number)
         {
@@ -48,7 +50,7 @@ namespace CallLogAnalyzer.Model
             }
         }
 
-        public static void SetDefaultRegionCodeFromDevice(Context context)
+        public static string GetDefaultRegionCodeFromDevice(Context context)
         {
             var telephonyManager = (TelephonyManager)context.GetSystemService(Context.TelephonyService);
             var code = telephonyManager.NetworkCountryIso;
@@ -57,7 +59,7 @@ namespace CallLogAnalyzer.Model
                 code = Locale.Default.Country;
             }
 
-            DefaultRegionCode = code;
+            return code.ToUpper();
         }
     }
 }

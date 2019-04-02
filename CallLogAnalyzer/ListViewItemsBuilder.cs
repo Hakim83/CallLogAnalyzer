@@ -35,7 +35,7 @@ namespace CallLogAnalyzer
                     items.Add(new Item(1)
                     {
                         Text = call.Title,
-                        SecondText = call.Type + " " + call.DateTime.ToString("dd/MM HH:mm ")
+                        SecondText = call.Type.GetDisplayName() + " " + call.DateTime.ToString("dd/MM HH:mm ")
                                   + ((int)call.Duration).ToDurationString()
                     });
                 }
@@ -58,7 +58,7 @@ namespace CallLogAnalyzer
                                    + number.CallsDuration.ToDurationString(),
                             Children = number.CallTypes.Select(callType => new Item(3)
                             {
-                                Text = callType.CallType + " " + callType.CallsCount + $" {str_calls} "
+                                Text = callType.CallType.GetDisplayName() + " " + callType.CallsCount + $" {str_calls} "
                                        + callType.CallsDuration.ToDurationString(),
                                 Children = callType.CallTimes.Select(callTime => new Item(4)
                                 {
@@ -113,7 +113,7 @@ namespace CallLogAnalyzer
                                 Children = carrier.Calls.Select(call=> new Item(3)
                                 {
                                     Text = call.Title,
-                                    SecondText = call.Type + " " + call.DateTime.ToString("dd/MM HH:mm ")
+                                    SecondText = call.Type.GetDisplayName() + " " + call.DateTime.ToString("dd/MM HH:mm ")
                                                  + ((int)call.Duration).ToDurationString()
                                 }).ToList<RecyclerViewItem>()
                             }).ToList<RecyclerViewItem>()
@@ -129,7 +129,7 @@ namespace CallLogAnalyzer
                                 Children = area.Calls.Select(call=> new Item(3)
                                 {
                                     Text = call.Title,
-                                    SecondText = call.Type + " " + call.DateTime.ToString("dd/MM HH:mm ")
+                                    SecondText = call.Type.GetDisplayName() + " " + call.DateTime.ToString("dd/MM HH:mm ")
                                                  + ((int)call.Duration).ToDurationString()
                                 }).ToList<RecyclerViewItem>()
                             }).ToList<RecyclerViewItem>()
@@ -141,7 +141,7 @@ namespace CallLogAnalyzer
                             Children = country.OtherType.Calls.Select(call=> new Item(2)
                                 {
                                     Text = call.Title,
-                                    SecondText = call.Type + " " + call.DateTime.ToString("dd/MM HH:mm ")
+                                    SecondText = call.Type.GetDisplayName() + " " + call.DateTime.ToString("dd/MM HH:mm ")
                                                  + ((int)call.Duration).ToDurationString()
                                 }).ToList<RecyclerViewItem>()
                         }

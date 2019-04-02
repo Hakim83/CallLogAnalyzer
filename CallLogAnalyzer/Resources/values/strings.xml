@@ -25,4 +25,14 @@
   <string name="other_calls">Other calls</string>
   <string name="by_contacts">By Contacts</string>
   <string name="by_carrier_area">By Carrier / Area</string>
+  <string name="ok">Ok</string>
+  <string name="cancel">Cancel</string>
+  <string name="select_period">Select Period</string>
+  <string name="Incoming">Incoming</string>
+  <string name="Outgoing">Outgoing</string>
+  <string name="Missed">Missed</string>
+  <string name="VoiceMail">VoiceMail</string>
+  <string name="Rejected">Rejected</string>
+  <string name="Blocked">Blocked</string>
+  <string name="we_need_permission">"We need calls permission to analyze call log!"</string>
 </resources>

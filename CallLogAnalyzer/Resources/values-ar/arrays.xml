@@ -1,0 +1,11 @@
+﻿<resources>
+  <string-array name="raw_sort_options">
+    <item>الزمن / التاريخ</item>
+    <item>زمن المكالمة</item>
+  </string-array>
+  <string-array name="contacts_sort_options">
+    <item>الزمن / التاريخe</item>
+    <item>عدد المكالمات</item>
+    <item>مجموع زمن المكالمات</item>
+  </string-array>
+</resources>

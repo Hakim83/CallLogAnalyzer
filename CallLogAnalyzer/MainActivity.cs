@@ -18,29 +18,30 @@ using CallLogAnalyzer.Helpers;
 using CallLogAnalyzer.Model;
 using Com.Multilevelview;
 using Java.Util;
+using DatePicker = CallLogAnalyzer.Dialogs.DatePicker;
 
 namespace CallLogAnalyzer
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme")]
     public class MainActivity : AppCompatActivity
     {
         private Button SubmitButton;
         private EditText FromEditText;
         private EditText ToEditText;
         //private Spinner methodSpinner;
-        RadioButton allCallsRadioButton;
-        RadioButton carrierRadioButton;
-        private LinearLayout contactCallLayout;
-        private CheckBox contactCheckBox;
-        private LinearLayout contactLayout;
-        private RadioButton contactDateRadioButton;
-        private RadioButton contactCountRadioButton;
-        private RadioButton contactDurationRadioButton;
-        private LinearLayout callLayout;
-        private RadioButton callDateRadioButton;
-        private RadioButton callDurationRadioButton;
-        private LinearLayout carrierAreaLayout;
-        private Spinner countrySpinner;
+        //RadioButton allCallsRadioButton;
+        //RadioButton carrierRadioButton;
+        //private LinearLayout contactCallLayout;
+        //private CheckBox contactCheckBox;
+        //private LinearLayout contactLayout;
+        //private RadioButton contactDateRadioButton;
+        //private RadioButton contactCountRadioButton;
+        //private RadioButton contactDurationRadioButton;
+        //private LinearLayout callLayout;
+        //private RadioButton callDateRadioButton;
+        //private RadioButton callDurationRadioButton;
+        //private LinearLayout carrierAreaLayout;
+        //private Spinner countrySpinner;
         //private TextView codeTextView;
 
         private const int CallLogRequest = 66;
@@ -54,22 +55,22 @@ namespace CallLogAnalyzer
             FromEditText = FindViewById<EditText>(Resource.Id.FromEditText);
             ToEditText = FindViewById<EditText>(Resource.Id.ToEditText);
             //methodSpinner = FindViewById<Spinner>(Resource.Id.methodSpinner);
-            allCallsRadioButton = FindViewById<RadioButton>(Resource.Id.allCallsRadioButton);
-            carrierRadioButton = FindViewById<RadioButton>(Resource.Id.carrierRadioButton);
-            contactCallLayout = FindViewById<LinearLayout>(Resource.Id.contactsCallsLayout);
-            contactCheckBox = FindViewById<CheckBox>(Resource.Id.contactsCheckBox);
+            //allCallsRadioButton = FindViewById<RadioButton>(Resource.Id.allCallsRadioButton);
+            //carrierRadioButton = FindViewById<RadioButton>(Resource.Id.carrierRadioButton);
+            //contactCallLayout = FindViewById<LinearLayout>(Resource.Id.contactsCallsLayout);
+            //contactCheckBox = FindViewById<CheckBox>(Resource.Id.contactsCheckBox);
 
-            contactLayout = FindViewById<LinearLayout>(Resource.Id.contactsLayout);
-            contactDateRadioButton = FindViewById<RadioButton>(Resource.Id.contactDateRadioButton);
-            contactCountRadioButton = FindViewById<RadioButton>(Resource.Id.contactCountRadioButton);
-            contactDurationRadioButton = FindViewById<RadioButton>(Resource.Id.contactDurationRadioButton);
+            //contactLayout = FindViewById<LinearLayout>(Resource.Id.contactsLayout);
+            //contactDateRadioButton = FindViewById<RadioButton>(Resource.Id.contactDateRadioButton);
+            //contactCountRadioButton = FindViewById<RadioButton>(Resource.Id.contactCountRadioButton);
+            //contactDurationRadioButton = FindViewById<RadioButton>(Resource.Id.contactDurationRadioButton);
 
-            callLayout = FindViewById<LinearLayout>(Resource.Id.callsLayout);
-            callDateRadioButton = FindViewById<RadioButton>(Resource.Id.callDateRadioButton);
-            callDurationRadioButton = FindViewById<RadioButton>(Resource.Id.callDurationRadioButton);
+            //callLayout = FindViewById<LinearLayout>(Resource.Id.callsLayout);
+            //callDateRadioButton = FindViewById<RadioButton>(Resource.Id.callDateRadioButton);
+            //callDurationRadioButton = FindViewById<RadioButton>(Resource.Id.callDurationRadioButton);
 
-            carrierAreaLayout = FindViewById<LinearLayout>(Resource.Id.carrierAreaLayout);
-            countrySpinner = FindViewById<Spinner>(Resource.Id.countrySpinner);
+            //carrierAreaLayout = FindViewById<LinearLayout>(Resource.Id.carrierAreaLayout);
+            //countrySpinner = FindViewById<Spinner>(Resource.Id.countrySpinner);
             //codeTextView = FindViewById<TextView>(Resource.Id.codeTextView);
 
             FromEditText.Click += FromEditText_Click;
@@ -85,20 +86,20 @@ namespace CallLogAnalyzer
             //methodSpinner.Adapter = methodAdapter;
             //methodSpinner.ItemSelected += MethodSpinner_ItemSelected;
 
-            allCallsRadioButton.CheckedChange += AllCallsRadioButton_CheckedChange;
-            carrierRadioButton.CheckedChange += CarrierRadioButton_CheckedChange;
-            carrierRadioButton.Checked = true;
+            //allCallsRadioButton.CheckedChange += AllCallsRadioButton_CheckedChange;
+            //carrierRadioButton.CheckedChange += CarrierRadioButton_CheckedChange;
+            //carrierRadioButton.Checked = true;
 
-            contactCheckBox.CheckedChange += ContactCheckBox_CheckedChange;
+            //contactCheckBox.CheckedChange += ContactCheckBox_CheckedChange;
 
-            PhoneNumberInfo.SetDefaultRegionCodeFromDevice(this);
-            var countryAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleSpinnerDropDownItem,
-                countriesInfo.Select(i => i.CountryName).ToArray());
-            countrySpinner.Adapter = countryAdapter;
-            countrySpinner.ItemSelected += CountrySpinner_ItemSelected;
-            var initialIndex =
-                countriesInfo.FindIndex(i => i.RegionCode.ToUpper() == PhoneNumberInfo.DefaultRegionCode.ToUpper());
-            countrySpinner.SetSelection(initialIndex);
+            //PhoneNumberInfo.SetDefaultRegionCodeFromDevice(this);
+            //var countryAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleSpinnerDropDownItem,
+            //    countriesInfo.Select(i => i.CountryName).ToArray());
+            //countrySpinner.Adapter = countryAdapter;
+            //countrySpinner.ItemSelected += CountrySpinner_ItemSelected;
+            //var initialIndex =
+            //    countriesInfo.FindIndex(i => i.RegionCode.ToUpper() == PhoneNumberInfo.DefaultRegionCode.ToUpper());
+            //countrySpinner.SetSelection(initialIndex);
 
             ContextHolder.Context = this;//used to access resources
 
@@ -107,36 +108,36 @@ namespace CallLogAnalyzer
             //testImojis();
         }
         
-        private void ContactCheckBox_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
-        {
-            if (contactCheckBox.Checked)
-            {
-                contactLayout.Visibility = ViewStates.Visible;
-                callLayout.Visibility = ViewStates.Gone;
-            }
-            else
-            {
-                contactLayout.Visibility = ViewStates.Gone;
-                callLayout.Visibility = ViewStates.Visible;
-            }
-        }
+        //private void ContactCheckBox_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        //{
+        //    if (contactCheckBox.Checked)
+        //    {
+        //        contactLayout.Visibility = ViewStates.Visible;
+        //        callLayout.Visibility = ViewStates.Gone;
+        //    }
+        //    else
+        //    {
+        //        contactLayout.Visibility = ViewStates.Gone;
+        //        callLayout.Visibility = ViewStates.Visible;
+        //    }
+        //}
 
         private void FromEditText_Click(object sender, System.EventArgs e)
         {
-            var dateDialog = DatePickerFragment.NewInstance((dateTime) =>
+            var dateDialog = DatePicker.NewInstance((dateTime) =>
                 {
                     FromEditText.Text = dateTime.ToString("dd/MM/yyyy");
                 });
-            dateDialog.Show(FragmentManager, dateDialog.Tag);
+            dateDialog.Show(SupportFragmentManager, dateDialog.Tag);
         }
 
         private void ToEditText_Click(object sender, System.EventArgs e)
         {
-            var dateDialog = DatePickerFragment.NewInstance((dateTime) =>
+            var dateDialog = DatePicker.NewInstance((dateTime) =>
             {
                 ToEditText.Text = dateTime.ToString("dd/MM/yyyy");
             });
-            dateDialog.Show(FragmentManager, dateDialog.Tag);
+            dateDialog.Show(SupportFragmentManager, dateDialog.Tag);
         }
 
         private void SubmitButton_Click(object sender, System.EventArgs e)
@@ -161,88 +162,88 @@ namespace CallLogAnalyzer
             intent.PutExtra("FromDate", FromEditText.Text);
             intent.PutExtra("ToDate", ToEditText.Text);
 
-            if (allCallsRadioButton.Checked)  // all
-            {
-                var method = contactCheckBox.Checked ? "Contacts" : "All";
-                intent.PutExtra("Method", method);
-                string sortBy;
-                if (method == "Contacts")
-                {
-                    if (contactDateRadioButton.Checked)
-                    {
-                        sortBy = "DateTime";
-                    }
-                    else if (contactCountRadioButton.Checked)
-                    {
-                        sortBy = "CallsCount";
-                    }
-                    else
-                    {
-                        sortBy = "CallsDuration";
-                    }
-                }
+            //if (allCallsRadioButton.Checked)  // all
+            //{
+            //    var method = contactCheckBox.Checked ? "Contacts" : "All";
+            //    intent.PutExtra("Method", method);
+            //    string sortBy;
+            //    if (method == "Contacts")
+            //    {
+            //        if (contactDateRadioButton.Checked)
+            //        {
+            //            sortBy = "DateTime";
+            //        }
+            //        else if (contactCountRadioButton.Checked)
+            //        {
+            //            sortBy = "CallsCount";
+            //        }
+            //        else
+            //        {
+            //            sortBy = "CallsDuration";
+            //        }
+            //    }
 
-                else
-                {
-                    if (callDateRadioButton.Checked)
-                    {
-                        sortBy = "DateTime";
-                    }
-                    else
-                    {
-                        sortBy = "CallsDuration";
-                    }
-                }
+            //    else
+            //    {
+            //        if (callDateRadioButton.Checked)
+            //        {
+            //            sortBy = "DateTime";
+            //        }
+            //        else
+            //        {
+            //            sortBy = "CallsDuration";
+            //        }
+            //    }
 
-                intent.PutExtra("SortBy", sortBy);
-            }
-            else        //carrier/area
-            {
-                intent.PutExtra("Method", "CarrierArea");
-                string defaultRegionCode = countriesInfo[countrySpinner.SelectedItemPosition].RegionCode;
-                //intent.PutExtra("DefaultRegionCode", defaultRegionCode);
-                PhoneNumberInfo.DefaultRegionCode = defaultRegionCode;
-            }
+            //    intent.PutExtra("SortBy", sortBy);
+            //}
+            //else        //carrier/area
+            //{
+            //    intent.PutExtra("Method", "CarrierArea");
+            //    string defaultRegionCode = countriesInfo[countrySpinner.SelectedItemPosition].RegionCode;
+            //    //intent.PutExtra("DefaultRegionCode", defaultRegionCode);
+            //    PhoneNumberInfo.DefaultRegionCode = defaultRegionCode;
+            //}
             StartActivity(intent);
 
         }
 
-        private void MethodSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            if (e.Position == 0)
-            {
-                contactCallLayout.Visibility = ViewStates.Visible;
-                carrierAreaLayout.Visibility = ViewStates.Gone;
-            }
-            else
-            {
-                contactCallLayout.Visibility = ViewStates.Gone;
-                carrierAreaLayout.Visibility = ViewStates.Visible;
-            }
-        }
+        //private void MethodSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        //{
+        //    if (e.Position == 0)
+        //    {
+        //        contactCallLayout.Visibility = ViewStates.Visible;
+        //        carrierAreaLayout.Visibility = ViewStates.Gone;
+        //    }
+        //    else
+        //    {
+        //        contactCallLayout.Visibility = ViewStates.Gone;
+        //        carrierAreaLayout.Visibility = ViewStates.Visible;
+        //    }
+        //}
 
-        private void CarrierRadioButton_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
-        {
-            if (e.IsChecked)
-            {
-                contactCallLayout.Visibility = ViewStates.Gone;
-                carrierAreaLayout.Visibility = ViewStates.Visible; 
-            }
-        }
+        //private void CarrierRadioButton_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        //{
+        //    if (e.IsChecked)
+        //    {
+        //        contactCallLayout.Visibility = ViewStates.Gone;
+        //        carrierAreaLayout.Visibility = ViewStates.Visible; 
+        //    }
+        //}
 
-        private void AllCallsRadioButton_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
-        {
-            if (e.IsChecked)
-            {
-                contactCallLayout.Visibility = ViewStates.Visible;
-                carrierAreaLayout.Visibility = ViewStates.Gone; 
-            }
-        }
+        //private void AllCallsRadioButton_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        //{
+        //    if (e.IsChecked)
+        //    {
+        //        contactCallLayout.Visibility = ViewStates.Visible;
+        //        carrierAreaLayout.Visibility = ViewStates.Gone; 
+        //    }
+        //}
 
-        private void CountrySpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            //codeTextView.Text = countriesInfo[e.Position].CountryCode.ToString();
-        }
+        //private void CountrySpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        //{
+        //    //codeTextView.Text = countriesInfo[e.Position].CountryCode.ToString();
+        //}
 
         private void EnsureCallPermission()
         {
@@ -283,7 +284,7 @@ namespace CallLogAnalyzer
 
                             // permission denied, boo! We should keep the call functionality
                             // disabled.. We also my inform user
-                            Toast.MakeText(this, "We need call log permission !",
+                            Toast.MakeText(this, GetString(Resource.String.we_need_permission),
                                 ToastLength.Long).Show();
                         }
                         return;

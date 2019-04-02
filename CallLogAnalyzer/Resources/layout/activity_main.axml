@@ -10,15 +10,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="10dp">
-
+		<TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/select_period"/>
         <EditText
             android:id="@+id/FromEditText"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-			android:layout_marginEnd="10dp"
             android:clickable="true"
             android:editable="false"
             android:focusable="false"
@@ -26,15 +27,14 @@
 
         <EditText
             android:id="@+id/ToEditText"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-			android:layout_marginStart="10dp"
             android:clickable="true"
             android:editable="false"
             android:focusable="false"
             android:hint="@string/to_date" />
     </LinearLayout>
+<!--
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,12 +56,12 @@
             android:layout_height="wrap_content"
             android:text="@string/carrier_area" />            
 	</RadioGroup>
-	<!--
+	
     <Spinner
         android:id="@+id/methodSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-	-->
+	
     <LinearLayout
         android:id="@+id/contactsCallsLayout"
         android:layout_width="match_parent"
@@ -157,7 +157,7 @@
             android:id="@+id/countrySpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <!--<TextView
+        <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -168,9 +168,9 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textColor="#ff000000"
-            android:paddingStart="5dp" />-->
+            android:paddingStart="5dp" />
     </LinearLayout>
-
+	-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

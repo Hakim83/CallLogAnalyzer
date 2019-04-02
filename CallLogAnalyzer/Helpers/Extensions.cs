@@ -53,5 +53,13 @@ namespace CallLogAnalyzer.Helpers
 
             return sb.ToString();
         }
+
+        public static string GetDisplayName(this Enum e)
+        {
+            string defaultResult = e.ToString();
+            var resId = ContextHolder.Context.Resources.GetIdentifier(e.ToString(), "string", ContextHolder.Context.PackageName);
+            return resId != 0 ? ContextHolder.Context.GetString(resId) : defaultResult;
+            //string ContextHolder.Context.GetString()
+        }
     }
 }
