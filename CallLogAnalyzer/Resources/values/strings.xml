@@ -8,7 +8,6 @@
   <string name="from_date">from date..</string>
   <string name="to_date">to date..</string>
   <string name="select_your_method">Select your method</string>
-  <string name="all_calls">All calls</string>
   <string name="carrier_area">Carrier / Area</string>
   <string name="gather_calls">Gather calls with same contact name</string>
   <string name="sort_calls_by">Sort calls by</string>
@@ -35,4 +34,5 @@
   <string name="Rejected">Rejected</string>
   <string name="Blocked">Blocked</string>
   <string name="we_need_permission">"We need calls permission to analyze call log!"</string>
+  <string name="we_need_default_dialer">"App need to be the dafault dialer to analyze call log!"</string>
 </resources>

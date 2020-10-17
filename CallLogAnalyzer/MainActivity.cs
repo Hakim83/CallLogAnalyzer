@@ -1,50 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Android;
+﻿using Android;
 using Android.App;
+using Android.App.Roles;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using Android.Support.V7.App;
 using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Support.V4.Content;
-using Android.Telephony;
-using Android.Views;
+using Android.Support.V7.App;
+using Android.Telecom;
 using Android.Widget;
 using CallLogAnalyzer.Helpers;
-using CallLogAnalyzer.Model;
-using Com.Multilevelview;
 using Java.Util;
+using System;
+using System.Collections.Generic;
 using DatePicker = CallLogAnalyzer.Dialogs.DatePicker;
 
 namespace CallLogAnalyzer
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme")]
+    [IntentFilter(new[] { Intent.ActionDial},Categories = new[] { Intent.CategoryDefault})]
+    [IntentFilter(new[] { Intent.ActionDial},Categories = new[] { Intent.CategoryDefault},DataScheme ="tel")]
     public class MainActivity : AppCompatActivity
     {
         private Button SubmitButton;
         private EditText FromEditText;
         private EditText ToEditText;
-        //private Spinner methodSpinner;
-        //RadioButton allCallsRadioButton;
-        //RadioButton carrierRadioButton;
-        //private LinearLayout contactCallLayout;
-        //private CheckBox contactCheckBox;
-        //private LinearLayout contactLayout;
-        //private RadioButton contactDateRadioButton;
-        //private RadioButton contactCountRadioButton;
-        //private RadioButton contactDurationRadioButton;
-        //private LinearLayout callLayout;
-        //private RadioButton callDateRadioButton;
-        //private RadioButton callDurationRadioButton;
-        //private LinearLayout carrierAreaLayout;
-        //private Spinner countrySpinner;
-        //private TextView codeTextView;
 
+        //private const int CallDefaultHandlerRequest = 64;
+        private const int DefaultDialerRequest = 65;
         private const int CallLogRequest = 66;
+
+        private RoleManager roleManager;
+
         private List<CountryInfos> countriesInfo = CountryInfos.GetAllCountries(Locale.Default.Country);
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -54,73 +42,15 @@ namespace CallLogAnalyzer
             SubmitButton = FindViewById<Button>(Resource.Id.submitButton);
             FromEditText = FindViewById<EditText>(Resource.Id.FromEditText);
             ToEditText = FindViewById<EditText>(Resource.Id.ToEditText);
-            //methodSpinner = FindViewById<Spinner>(Resource.Id.methodSpinner);
-            //allCallsRadioButton = FindViewById<RadioButton>(Resource.Id.allCallsRadioButton);
-            //carrierRadioButton = FindViewById<RadioButton>(Resource.Id.carrierRadioButton);
-            //contactCallLayout = FindViewById<LinearLayout>(Resource.Id.contactsCallsLayout);
-            //contactCheckBox = FindViewById<CheckBox>(Resource.Id.contactsCheckBox);
-
-            //contactLayout = FindViewById<LinearLayout>(Resource.Id.contactsLayout);
-            //contactDateRadioButton = FindViewById<RadioButton>(Resource.Id.contactDateRadioButton);
-            //contactCountRadioButton = FindViewById<RadioButton>(Resource.Id.contactCountRadioButton);
-            //contactDurationRadioButton = FindViewById<RadioButton>(Resource.Id.contactDurationRadioButton);
-
-            //callLayout = FindViewById<LinearLayout>(Resource.Id.callsLayout);
-            //callDateRadioButton = FindViewById<RadioButton>(Resource.Id.callDateRadioButton);
-            //callDurationRadioButton = FindViewById<RadioButton>(Resource.Id.callDurationRadioButton);
-
-            //carrierAreaLayout = FindViewById<LinearLayout>(Resource.Id.carrierAreaLayout);
-            //countrySpinner = FindViewById<Spinner>(Resource.Id.countrySpinner);
-            //codeTextView = FindViewById<TextView>(Resource.Id.codeTextView);
 
             FromEditText.Click += FromEditText_Click;
             ToEditText.Click += ToEditText_Click;
             SubmitButton.Click += SubmitButton_Click;
 
-            //var methodAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleSpinnerDropDownItem,
-            //    new string[]
-            //    {
-            //        "All Calls",
-            //        "Carrier / Area"
-            //    });
-            //methodSpinner.Adapter = methodAdapter;
-            //methodSpinner.ItemSelected += MethodSpinner_ItemSelected;
-
-            //allCallsRadioButton.CheckedChange += AllCallsRadioButton_CheckedChange;
-            //carrierRadioButton.CheckedChange += CarrierRadioButton_CheckedChange;
-            //carrierRadioButton.Checked = true;
-
-            //contactCheckBox.CheckedChange += ContactCheckBox_CheckedChange;
-
-            //PhoneNumberInfo.SetDefaultRegionCodeFromDevice(this);
-            //var countryAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleSpinnerDropDownItem,
-            //    countriesInfo.Select(i => i.CountryName).ToArray());
-            //countrySpinner.Adapter = countryAdapter;
-            //countrySpinner.ItemSelected += CountrySpinner_ItemSelected;
-            //var initialIndex =
-            //    countriesInfo.FindIndex(i => i.RegionCode.ToUpper() == PhoneNumberInfo.DefaultRegionCode.ToUpper());
-            //countrySpinner.SetSelection(initialIndex);
-
             ContextHolder.Context = this;//used to access resources
 
             EnsureCallPermission();
-            //runTest();
-            //testImojis();
         }
-        
-        //private void ContactCheckBox_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
-        //{
-        //    if (contactCheckBox.Checked)
-        //    {
-        //        contactLayout.Visibility = ViewStates.Visible;
-        //        callLayout.Visibility = ViewStates.Gone;
-        //    }
-        //    else
-        //    {
-        //        contactLayout.Visibility = ViewStates.Gone;
-        //        callLayout.Visibility = ViewStates.Visible;
-        //    }
-        //}
 
         private void FromEditText_Click(object sender, System.EventArgs e)
         {
@@ -162,88 +92,9 @@ namespace CallLogAnalyzer
             intent.PutExtra("FromDate", FromEditText.Text);
             intent.PutExtra("ToDate", ToEditText.Text);
 
-            //if (allCallsRadioButton.Checked)  // all
-            //{
-            //    var method = contactCheckBox.Checked ? "Contacts" : "All";
-            //    intent.PutExtra("Method", method);
-            //    string sortBy;
-            //    if (method == "Contacts")
-            //    {
-            //        if (contactDateRadioButton.Checked)
-            //        {
-            //            sortBy = "DateTime";
-            //        }
-            //        else if (contactCountRadioButton.Checked)
-            //        {
-            //            sortBy = "CallsCount";
-            //        }
-            //        else
-            //        {
-            //            sortBy = "CallsDuration";
-            //        }
-            //    }
-
-            //    else
-            //    {
-            //        if (callDateRadioButton.Checked)
-            //        {
-            //            sortBy = "DateTime";
-            //        }
-            //        else
-            //        {
-            //            sortBy = "CallsDuration";
-            //        }
-            //    }
-
-            //    intent.PutExtra("SortBy", sortBy);
-            //}
-            //else        //carrier/area
-            //{
-            //    intent.PutExtra("Method", "CarrierArea");
-            //    string defaultRegionCode = countriesInfo[countrySpinner.SelectedItemPosition].RegionCode;
-            //    //intent.PutExtra("DefaultRegionCode", defaultRegionCode);
-            //    PhoneNumberInfo.DefaultRegionCode = defaultRegionCode;
-            //}
             StartActivity(intent);
 
         }
-
-        //private void MethodSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        //{
-        //    if (e.Position == 0)
-        //    {
-        //        contactCallLayout.Visibility = ViewStates.Visible;
-        //        carrierAreaLayout.Visibility = ViewStates.Gone;
-        //    }
-        //    else
-        //    {
-        //        contactCallLayout.Visibility = ViewStates.Gone;
-        //        carrierAreaLayout.Visibility = ViewStates.Visible;
-        //    }
-        //}
-
-        //private void CarrierRadioButton_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
-        //{
-        //    if (e.IsChecked)
-        //    {
-        //        contactCallLayout.Visibility = ViewStates.Gone;
-        //        carrierAreaLayout.Visibility = ViewStates.Visible; 
-        //    }
-        //}
-
-        //private void AllCallsRadioButton_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
-        //{
-        //    if (e.IsChecked)
-        //    {
-        //        contactCallLayout.Visibility = ViewStates.Visible;
-        //        carrierAreaLayout.Visibility = ViewStates.Gone; 
-        //    }
-        //}
-
-        //private void CountrySpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        //{
-        //    //codeTextView.Text = countriesInfo[e.Position].CountryCode.ToString();
-        //}
 
         private void EnsureCallPermission()
         {
@@ -253,14 +104,45 @@ namespace CallLogAnalyzer
                 != Permission.Granted)
             {
 
-                // Since we don't granted permission, request permission from user
-                ActivityCompat.RequestPermissions(this,
-                    new[] { Manifest.Permission.ReadCallLog },
-                    CallLogRequest);
+                // before granting permission ensure app default dialer (required by android api)
+                RequestDialRole();
             }
             else
             {
                 SubmitButton.Enabled = true;
+            }
+        }
+
+        void RequestCallLogPermission()
+        {
+            ActivityCompat.RequestPermissions(this,
+                new[] { Manifest.Permission.ReadCallLog },
+                CallLogRequest);
+        }
+
+        private void RequestDialRole()
+        {
+
+            //check if requesting default dialer is needed
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Q)
+            {
+                roleManager = (RoleManager)GetSystemService(RoleService);
+                if (!roleManager.IsRoleAvailable(RoleManager.RoleDialer) ||
+                    roleManager.IsRoleHeld(RoleManager.RoleDialer))
+                {
+                    RequestCallLogPermission();
+                }
+                else
+                {
+                    Intent intent = roleManager.CreateRequestRoleIntent(RoleManager.RoleDialer);
+                    StartActivityForResult(intent, DefaultDialerRequest);
+                }
+            }
+            else
+            {
+                Intent intent = new Intent(TelecomManager.ActionChangeDefaultDialer);
+                intent.PutExtra(TelecomManager.ExtraChangeDefaultDialerPackageName, PackageName);
+                StartActivityForResult(intent,DefaultDialerRequest);
             }
         }
 
@@ -290,40 +172,23 @@ namespace CallLogAnalyzer
                         return;
                     }
 
-                    // other 'case' lines to check for other
-                    // permissions this app might request
             }
         }
 
-        //void runTest()
-        //{
-        //    var textView = FindViewById<TextView>(Resource.Id.TestTextView);
-        //    //var tm = GetSystemService(TelephonyService) as TelephonyManager;
-
-        //    //PhoneNumberInfo.DefaultRegionCode = tm.NetworkCountryIso;
-        //    PhoneNumberInfo.DefaultRegionCode = "SD";
-        //    string[] numbers = {"0912874941","+249123233320","00966 563456789","187232323","999","01234"};
-        //    var values = numbers.Select(n =>new PhoneNumberInfo(n));
-        //    var sb = new StringBuilder();
-        //    foreach (var value in values)
-        //    {
-        //        sb.Append("\nNumber: " + value.Number)
-        //            .Append("\nNational Number: " + value.NationalNumber)
-        //            .Append("\nCountry Name: "+value.CountryName)
-        //            .Append("\nCountry Code: " + value.CountryCode)
-        //            .Append("\nArea Name: "+value.AreaName)
-        //            .Append("\nNumber Type: " + value.PhoneNumberType.ToString())
-        //            .Append("\nCarrier Name: " + value.CarrierName)
-        //            .AppendLine();
-        //    }
-
-        //    textView.Text = sb.ToString();
-        //}
-
-        //void testImojis()
-        //{
-        //    var textView = FindViewById<TextView>(Resource.Id.TestTextView);
-        //    textView.Text = CountryInfos.GetCountriesFlags();
-        //}
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            if (requestCode == DefaultDialerRequest)
+            {
+                if (resultCode == Result.Ok)
+                {
+                    RequestCallLogPermission();
+                }
+                else
+                {
+                    Toast.MakeText(this, GetString(Resource.String.we_need_default_dialer), ToastLength.Long).Show();
+                }
+            }
+            //base.OnActivityResult(requestCode, resultCode, data);
+        }
     }
 }

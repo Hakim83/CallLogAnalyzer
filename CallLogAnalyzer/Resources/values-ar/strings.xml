@@ -8,7 +8,6 @@
   <string name="from_date">من تاريخ..</string>
   <string name="to_date">إلى تاريخ..</string>
   <string name="select_your_method">إختر الطريقة</string>
-  <string name="all_calls">جميع المكالمات</string>
   <string name="carrier_area">مقدم الخدمة / المنطقة</string>
   <string name="gather_calls">تجميع المكالمات لنفس الإسم</string>
   <string name="sort_calls_by">ترتيب المكالمات بإستخدام</string>
@@ -35,4 +34,5 @@
   <string name="Rejected">مرفوضة</string>
   <string name="Blocked">محظورة</string>
   <string name="we_need_permission">"نحتاج السماح بالدخول للمكالمات لتحليلها!"</string>
+  <string name="we_need_default_dialer">"يجب ان يصبح التطبيق المتصل الإفتراضي لكي يتمكن من تحليل المكالمات"</string>
 </resources>

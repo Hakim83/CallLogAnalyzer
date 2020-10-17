@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using Android.OS;
+﻿using Android.OS;
 using Android.Provider;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
 using Android.Support.V7.App;
-using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
-using Android.Widget;
 using CallLogAnalyzer.Model;
-using CallLogAnalyzer.ViewModel;
 using MultilevelView;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using CallType = CallLogAnalyzer.Model.CallType;
 
 namespace CallLogAnalyzer
@@ -22,6 +20,7 @@ namespace CallLogAnalyzer
         private int callCount = 0;
         public static List<CallInfo> AllCalls = null;
         private TabLayout tabLayout;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -36,6 +35,7 @@ namespace CallLogAnalyzer
             DateTime fromDate = DateTime.ParseExact(fromDateString, "dd/MM/yyyy", null);
             DateTime toDate = DateTime.ParseExact(toDateString, "dd/MM/yyyy", null);
             toDate += new TimeSpan(23, 59, 59); //include whole date!
+
             AllCalls = GetCallDetails(fromDate, toDate);
 
             _fragments = new Fragment[]
@@ -45,49 +45,13 @@ namespace CallLogAnalyzer
                 new CarrierAreaFragment()
             };
 
-
             tabLayout = FindViewById<TabLayout>(Resource.Id.tabLayout);
             tabLayout.TabSelected += TabLayout_TabSelected;
 
             AddTabToActionBar(Resource.String.all_calls, Resource.Drawable.ic_list);
             AddTabToActionBar(Resource.String.by_contacts, Resource.Drawable.ic_contacts);
             AddTabToActionBar(Resource.String.by_carrier_area, Resource.Drawable.ic_language);
-            //IList<RecyclerViewItem> itemList;
 
-            //string method = Intent.GetStringExtra("Method");
-            //if (method == "All")
-            //{
-            //    var sortBy = Intent.GetStringExtra("SortBy");
-            //    var callsViewModel = new CallsViewModel(allCalls,sortBy);
-            //    itemList = new ListViewItemsBuilder().GetItems(callsViewModel);
-            //    //textView.Text = callsViewModel.ToString();
-            //}
-            //else if(method=="Contacts")
-            //{
-            //    var sortBy = Intent.GetStringExtra("SortBy");
-            //    var callersViewModel = new CallersViewModel(allCalls, sortBy);
-            //    itemList = new ListViewItemsBuilder().GetItems(callersViewModel);
-            //    //textView.Text = callersViewModel.ToString();
-            //}
-            //else
-            //{
-            //   var detailedCallsViewModel = new DetailedCallsViewModel(allCalls);
-            //    itemList = new ListViewItemsBuilder().GetItems(detailedCallsViewModel);
-            //   //textView.Text = detailedCallsViewModel.ToString();
-            //}
-
-            ////listview and updates
-            //MultiLevelRecyclerView multiLevelRecyclerView = (MultiLevelRecyclerView)FindViewById(Resource.Id.MultiLevelView);
-            //multiLevelRecyclerView.SetLayoutManager(new LinearLayoutManager(this));
-
-            ////itemList = recursivePopulateFakeData(0, 24);
-
-            //MyAdapter myAdapter = new MyAdapter(this, itemList, multiLevelRecyclerView);
-
-            //multiLevelRecyclerView.SetAdapter(myAdapter);
-            //multiLevelRecyclerView.ToggleItemOnClick = false;
-            //multiLevelRecyclerView.Accordion = true;
-            //multiLevelRecyclerView.OpenTill(0);
         }
 
         private void TabLayout_TabSelected(object sender, TabLayout.TabSelectedEventArgs e)
@@ -143,39 +107,39 @@ namespace CallLogAnalyzer
             return (long)timeSpan.TotalMilliseconds;
         }
 
-        private IList<RecyclerViewItem> recursivePopulateFakeData(int levelNumber, int depth)
-        {
-            IList<RecyclerViewItem> itemList = new List<RecyclerViewItem>();
+        //private IList<RecyclerViewItem> recursivePopulateFakeData(int levelNumber, int depth)
+        //{
+        //    IList<RecyclerViewItem> itemList = new List<RecyclerViewItem>();
 
-            String title;
-            switch (levelNumber)
-            {
-                case 1:
-                    title = "PQRST ";
-                    break;
-                case 2:
-                    title = "XYZ ";
-                    break;
-                default:
-                    title = "ABCDE ";
-                    break;
-            }
+        //    String title;
+        //    switch (levelNumber)
+        //    {
+        //        case 1:
+        //            title = "PQRST ";
+        //            break;
+        //        case 2:
+        //            title = "XYZ ";
+        //            break;
+        //        default:
+        //            title = "ABCDE ";
+        //            break;
+        //    }
 
-            for (int i = 0; i < depth; i++)
-            {
-                Item item = new Item(levelNumber);
-                item.Text = title + i;
-                item.SecondText = title.ToLower() + i;
-                if (depth % 2 == 0)
-                {
-                    item.AddChildren(recursivePopulateFakeData(levelNumber + 1, depth / 2));
-                }
+        //    for (int i = 0; i < depth; i++)
+        //    {
+        //        Item item = new Item(levelNumber);
+        //        item.Text = title + i;
+        //        item.SecondText = title.ToLower() + i;
+        //        if (depth % 2 == 0)
+        //        {
+        //            item.AddChildren(recursivePopulateFakeData(levelNumber + 1, depth / 2));
+        //        }
 
-                itemList.Add(item);
-            }
+        //        itemList.Add(item);
+        //    }
 
-            return itemList;
-        }
+        //    return itemList;
+        //}
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
@@ -200,9 +164,9 @@ namespace CallLogAnalyzer
                 throw;
             }
         }
-        
+
         Fragment[] _fragments;
 
-        
+
     }
 }

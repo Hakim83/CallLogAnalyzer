@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using Android.OS;
-using Android.Runtime;
+﻿using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
 using Android.Support.V7.Widget;
-using Android.Util;
 using Android.Views;
-using Android.Widget;
 using CallLogAnalyzer.Dialogs;
 using CallLogAnalyzer.ViewModel;
 using MultilevelView;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace CallLogAnalyzer
 {
@@ -49,6 +46,7 @@ namespace CallLogAnalyzer
                 dialog.SortMethodSelected += UpdateItems;
                 dialog.Show(Activity.SupportFragmentManager, "SortBy dialog");
             };
+
             return view;
         }
 
