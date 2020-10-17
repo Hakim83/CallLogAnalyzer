@@ -9,11 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarBinding", "JarBinding\Ja
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiLevelView", "MultilevelView\MultiLevelView.csproj", "{0FFE1CCA-8A39-48FC-A4A2-164997470A30}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{05A059DF-0625-4E2B-B1D4-E7AF7CC7B17F}"
-	ProjectSection(SolutionItems) = preProject
-		..\privacypolicy.en.html = ..\privacypolicy.en.html
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
