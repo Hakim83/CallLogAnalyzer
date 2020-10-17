@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallLogAnalyzer", "CallLogAnalyzer\CallLogAnalyzer.csproj", "{BAEB5457-85B8-4779-A54B-A5AE37F2A72C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarBinding", "JarBinding\JarBinding.csproj", "{C427E32E-8395-4C96-8A6F-9F39953F993C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiLevelView", "MultilevelView\MultiLevelView.csproj", "{0FFE1CCA-8A39-48FC-A4A2-164997470A30}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{05A059DF-0625-4E2B-B1D4-E7AF7CC7B17F}"
+	ProjectSection(SolutionItems) = preProject
+		..\privacypolicy.en.html = ..\privacypolicy.en.html
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
